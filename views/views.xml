@@ -155,8 +155,8 @@
 
     <!--VISTAS DE CONDUCTOR-->
     <!-- Tree -->
-    <record model="ir.ui.view" id="hr.view_employee_tree">
-      <field name="name">hr.employee.view.tree</field>
+    <record model="ir.ui.view" id="transportes.conductor_tree_view">
+      <field name="name">hr.employee.my_tree</field>
       <field name="model">hr.employee</field>
       <field name="arch" type="xml">
         <tree>
