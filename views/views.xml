@@ -1,0 +1,204 @@
+<odoo>
+  <data>
+
+
+    <!-- VISTAS DE VIAJE -->
+    <!-- Tree -->
+    <record model="ir.ui.view" id="transportes.viaje_list_view">
+      <field name="name">transportes.viaje.view.tree</field>
+      <field name="model">transportes.viaje</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="provincia"/>
+          <field name="mercancia"/>
+          <field name="camion"/>
+          <field name="entregado"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    <!-- Form -->
+    <record model="ir.ui.view" id="transportes.viaje_form_view">
+      <field name="name">transportes.viaje.view.form</field>
+      <field name="model">transportes.viaje</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de viajes">
+          <sheet>
+
+            <div class="oe_title">
+              <h1>Detalles del viaje</h1>
+            </div>
+            
+            <group>
+                <group>
+                    <separator string="Información básica"/>
+                    <field name="provincia"/>
+                    <field name="camion"/>
+                    <field name="conductor"/>
+                </group>
+        
+                <group>
+                    <separator string="Otros detalles"/>
+                    <field name="ciudad"/>
+                    <field name="destinatario"/>
+                    <field name="mercancia"/>
+                    <field name="entregado"/>
+                    <field name="other"/>
+
+                </group>
+
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+  
+
+    <!-- Kanban -->
+    <record model="ir.ui.view" id="transportes.viaje_kanban_view">
+      <field name="name">transportes.viaje.kanban</field>
+      <field name="model">transportes.viaje</field>
+      <field name="arch" type="xml">
+        <kanban default_group_by="entregado" sample="1">
+          <field name="destinatario"/>
+          <field name="provincia"/>
+          <field name="camion"/>
+          <progressbar field="entregado" colors="{&quot;planned&quot;: &quot;success&quot;, &quot;today&quot;: &quot;warning&quot;, &quot;overdue&quot;: &quot;danger&quot;}"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div class="oe_kanban_global_click">
+                <div class="oe_kanban_details">
+                  <div class="oe_kanban_record_top">
+                    <strong class="o_kanban_record_title oe_partner_heading">
+                      Destinatario:
+                      <field name="destinatario"/>
+                      <br/>
+                      Destino:
+                      <field name="provincia"/>
+                      <br/>
+                      Vehículo asociado:
+                      <field name="camion"/>
+                    </strong>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </templates>
+        </kanban> 
+      </field>
+    </record>
+
+
+
+
+
+    <!-- VISTAS DE CAMIÓN -->
+    <!-- Tree -->
+    <record model="ir.ui.view" id="transportes.camion_list_view">
+      <field name="name">transportes.camion.view.tree</field>
+      <field name="model">transportes.camion</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="marca"/>
+          <field name="modelo"/>
+          <field name="fecha_compra"/>
+          <field name="antiguedad"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    <!-- Form -->
+    <record model="ir.ui.view" id="transportes.camion_form_view">
+      <field name="name">transportes.camion.view.form</field>
+      <field name="model">transportes.camion</field>
+      <field name="arch" type="xml">
+        <form string="Formulario de camiones">
+          <sheet>
+
+            <div class="oe_title">
+              <label class="oe_edit_only" for="name" string="Matrícula"/>
+              <h1>
+                <field name="name" placeholder="Matrícula"/>
+              </h1>
+            </div>
+            
+            <group>
+                <group>
+                    <separator string="Información básica"/>
+                    <field name="marca"/>
+                    <field name="modelo"/>
+                </group>
+        
+                <group>
+                    <separator string="Otros detalles"/>
+                    <field name="potencia"/>
+                    <field name="color"/>
+                    <field name="fecha_compra"/>
+                    <field name="viajes_camion"/>
+                    <field name="antiguedad"/>
+                </group>
+
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+
+
+
+
+    <!--VISTAS DE CONDUCTOR-->
+    <!-- Tree -->
+    <record model="ir.ui.view" id="hr.view_employee_tree">
+      <field name="name">hr.employee.view.tree</field>
+      <field name="model">hr.employee</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="phone"/>
+          <field name="private_email"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="transportes.camion_action_window">
+      <field name="name">Camiones</field>
+      <field name="res_model">transportes.camion</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="transportes.viaje_action_window">
+      <field name="name">Viajes</field>
+      <field name="res_model">transportes.viaje</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="transportes.conductor_action_window">
+      <field name="name">Conductores</field>
+      <field name="res_model">hr.employee</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    
+
+
+
+    <!-- Top menu item -->
+    <menuitem name="Transportes" id="transportes.menu_root"/>
+
+    <!-- menu categories -->
+    <menuitem name="Camiones" id="transportes.camion_menu" parent="transportes.menu_root" action="transportes.camion_action_window"/>
+    <menuitem name="Viajes" id="transportes.viaje_menu" parent="transportes.menu_root" action="transportes.viaje_action_window"/>
+    <menuitem name="Conductores" id="transportes.conductor_menu" parent="transportes.menu_root" action="transportes.conductor_action_window"/>
+
+
+  </data>
+</odoo>

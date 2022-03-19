@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+        
+        <record id="transportes.module_category_transportes" model="ir.module.category">
+            <field name="name">Transportes</field>
+            <field name="description">Gestiona los transportes</field>
+            <field name="sequence">100</field>
+        </record>
+
+
+        <record id="group_transportes_usuario" model="res.groups">
+            <field name="name">Usuario</field>
+            <field name="category_id" ref="transportes.module_category_transportes"/>
+            <field name="comment">Usuarios que realizan los transportes</field>
+        </record>
+
+
+        <record id="group_transportes_director" model="res.groups">
+            <field name="name">Director</field>
+            <field name="category_id" ref="transportes.module_category_transportes"/>
+            <field name="comment">Usuarios que gestionan los transportes</field>
+            <field name="implied_ids" eval="[(4, ref('group_transportes_usuario'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+
+
+
+    </data>
+</odoo>

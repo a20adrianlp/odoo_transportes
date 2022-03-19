@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_transportes_camion_director,transportes.camion.director,model_transportes_camion,group_transportes_director,1,1,1,1
+access_transportes_viaje_director,transportes.viaje.director,model_transportes_viaje,group_transportes_director,1,1,1,1
+access_transportes_conductor_director,transportes.conductor.director,model_hr_employee,group_transportes_director,1,1,1,1
