@@ -3,10 +3,10 @@
     'name': "Transportes",
 
     'summary': """
-        Mi modulo de transportes""",
+        Módulo para la gestión de transportes""",
 
     'description': """
-        Gestión de camiones y vehiculos de transporte de mercancías
+        Gestión de camiones, conductores y los viajes que estos realizan.
     """,
 
     'author': "A20AdrianLP",
