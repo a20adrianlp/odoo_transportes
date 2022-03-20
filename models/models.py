@@ -1,26 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# from odoo import models, fields, api
-
-
-# class mimodulo(models.Model):
-#     _name = 'mimodulo.mimodulo'
-#     _description = 'mimodulo.mimodulo'
-
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         for record in self:
-#             record.value2 = float(record.value) / 100
-
-
 from odoo import models, fields, api
 from dateutil.relativedelta import *
 from datetime import date
+
 
 class camion(models.Model):
     _name = 'transportes.camion'
@@ -39,7 +22,7 @@ class camion(models.Model):
     viajes_camion = fields.One2many('transportes.viaje', 'camion', string='Viajes')
 
 
-    #Campo calculado años, en base a la fecha de matriculacion, video odoo whatsapp
+    #Campo calculado años, en base a la fecha de matriculacion calcula la antigüedad del vehículo
     antiguedad = fields.Integer('Años', compute='get_antiguedad')
     @api.depends('fecha_compra')
     def get_antiguedad(self):
@@ -54,10 +37,10 @@ class viaje(models.Model):
     _name = 'transportes.viaje'
     _description = 'Permite definir características de un viaje'
 
-    #Relacion con el conductor que realiza el viaje
+    #Relación con el conductor que realiza el viaje
     conductor = fields.Many2one('hr.employee', string='Conductor', help='Conductor del camión', required=True)
     
-    #Relacion entre el viaje y el camion que lo entregará
+    #Relación entre el viaje y el camion que lo entregará
     camion = fields.Many2one('transportes.camion', string='Camión', help='Camión que realizará el viaje', required=True)
 
 
@@ -109,7 +92,7 @@ class viaje(models.Model):
         ('sevilla', 'Sevilla'),
         ('soria', 'Soria'),
         ('tarragona', 'Tarragona'),
-        ('terual', 'Terual'),
+        ('teruel', 'Teruel'),
         ('toledo', 'Toledo'),
         ('valencia', 'Valencia'),
         ('valladolid', 'Valladolid'),
@@ -132,8 +115,6 @@ class viaje(models.Model):
 class conductor(models.Model):
     _inherit = 'hr.employee'
     
-
-    #Viajes realizados por el conductor, la relacion existe pero falta implementarla en la vista
     viajes_conductor = fields.One2many('transportes.viaje', 'conductor', string='Viajes realizados por el conductor')
-    carnet = fields.Selection([('c1', 'C1'),('c1e', 'C1 + E'),('c', 'C'),('ce', 'C + E')],string='Tipo de Carnet', required=True)
+    
     
