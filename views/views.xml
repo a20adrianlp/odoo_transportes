@@ -192,7 +192,7 @@
 
 
     <!-- Top menu item -->
-    <menuitem name="Transportes" id="transportes.menu_root"/>
+    <menuitem name="Transportes" id="transportes.menu_root" web_icon="transportes,static/description/camion.png"/>
 
     <!-- menu categories -->
     <menuitem name="Camiones" id="transportes.camion_menu" parent="transportes.menu_root" action="transportes.camion_action_window"/>
@@ -202,3 +202,4 @@
 
   </data>
 </odoo>
+ 
